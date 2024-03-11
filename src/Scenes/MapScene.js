@@ -4,8 +4,10 @@ export default class MapScene extends Phaser.Scene {
   constructor() {
     super("MapScene");
     this.player;
-    this.diamond;
-    
+    this.diamondFirst;
+    this.diamondSecond;
+    this.diamondThir;
+    this.diamondFour;
   }
   preload() {}
   create() {
@@ -60,8 +62,10 @@ export default class MapScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.diamond = this.physics.add.sprite(400, 250, "diamond");
-    this.physics.add.collider(this.diamond, colision);
+    //------------------ Diamond ----------------------
+
+    this.diamondFirst = this.physics.add.sprite(400, 250, "diamond");
+    this.physics.add.collider(this.diamondFirst, colision);
     this.anims.create({
       key: "diamond",
       frames: this.anims.generateFrameNumbers("diamond", {
@@ -73,11 +77,86 @@ export default class MapScene extends Phaser.Scene {
     });
     this.physics.add.overlap(
       this.player,
-      this.diamond,
-      this.collectDiamond,
+      this.diamondFirst,
+      this.collectDiamondFirst,
       null,
       this
     );
+
+    this.diamondSecond = this.physics.add.sprite(700, 250, "diamond");
+    this.physics.add.collider(this.diamondSecond, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.diamondSecond,
+      this.collectDiamondSecond,
+      null,
+      this
+    );
+
+    this.diamondThir = this.physics.add.sprite(900, 250, "diamond");
+    this.physics.add.collider(this.diamondThir, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.diamondThir,
+      this.collectDiamondThir,
+      null,
+      this
+    );
+
+    this.diamondFour = this.physics.add.sprite(400, 550, "diamond");
+    this.physics.add.collider(this.diamondFour, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.diamondFour,
+      this.collectDiamondFour,
+      null,
+      this
+    );
+
+    // ----------------------------------------------- //
+
+    // ------------------- HEART -------------------- //
+
+    this.heartFirst = this.physics.add.sprite(500, 250, "heart");
+    this.physics.add.collider(this.heartFirst, colision);
+    this.anims.create({
+      key: "heart-idle",
+      frames: this.anims.generateFrameNumbers("heart", {
+        start: 0,
+        end: 7,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.physics.add.overlap(
+      this.player,
+      this.heartFirst,
+      this.collectHeartFirst,
+      null,
+      this
+    );
+
+    this.heartSecond = this.physics.add.sprite(150, 250, "heart");
+    this.physics.add.collider(this.heartSecond, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.heartSecond,
+      this.collectHeartSecond,
+      null,
+      this
+    );
+
+    this.heartThir = this.physics.add.sprite(290, 250, "heart");
+    this.physics.add.collider(this.heartThir, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.heartThir,
+      this.collectHeartThir,
+      null,
+      this
+    );
+
+    // ------------------------------------------------- //
 
     this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
     this.cameras.main.setBounds(0, 0, 1250, 630);
@@ -86,11 +165,18 @@ export default class MapScene extends Phaser.Scene {
 
     this.lastDecoration = "Right";
 
-    console.log(backGround);
+    this.scene.launch("UIScene");
   }
 
   update() {
-    this.diamond.anims.play("diamond", true);
+    this.diamondFirst.anims.play("diamond", true);
+    this.diamondSecond.anims.play("diamond", true);
+    this.diamondThir.anims.play("diamond", true);
+    this.diamondFour.anims.play("diamond", true);
+
+    this.heartFirst.anims.play("heart-idle", true);
+    this.heartSecond.anims.play("heart-idle", true);
+    this.heartThir.anims.play("heart-idle", true);
 
     if (this.cursors.right.isDown) {
       this.player.setVelocityX(150);
@@ -110,7 +196,38 @@ export default class MapScene extends Phaser.Scene {
     }
   }
 
-  collectDiamond() {
-    this.diamond.disableBody(true, true);
+  collectDiamondFirst() {
+    this.diamondFirst.disableBody(true, true);
+    this.scene.get("UIScene").increaseGems();
+  }
+
+  collectDiamondSecond() {
+    this.diamondSecond.disableBody(true, true);
+    this.scene.get("UIScene").increaseGems();
+  }
+
+  collectDiamondThir() {
+    this.diamondThir.disableBody(true, true);
+    this.scene.get("UIScene").increaseGems();
+  }
+
+  collectDiamondFour() {
+    this.diamondFour.disableBody(true, true);
+    this.scene.get("UIScene").increaseGems();
+  }
+
+  collectHeartFirst() {
+    this.heartFirst.disableBody(true, true);
+    this.scene.get("UIScene").increaseHearts();
+  }
+
+  collectHeartSecond() {
+    this.heartSecond.disableBody(true, true);
+    this.scene.get("UIScene").increaseHearts();
+  }
+
+  collectHeartThir() {
+    this.heartThir.disableBody(true, true);
+    this.scene.get("UIScene").increaseHearts();
   }
 }

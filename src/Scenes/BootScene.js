@@ -68,6 +68,31 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 14,
       }
     );
+    this.load.image("live-bar", "/public/assets/HeartDiamond/Live Bar.png");
+    this.load.spritesheet(
+      "diamond-bar",
+      "/public/assets/HeartDiamond/Small Diamond (18x14).png",
+      {
+        frameWidth: 18,
+        frameHeight: 14,
+      }
+    );
+    this.load.spritesheet(
+      "heart-bar",
+      "/public/assets/HeartDiamond/Small Heart Idle (18x14).png",
+      {
+        frameWidth: 18,
+        frameHeight: 14,
+      }
+    );
+    this.load.spritesheet(
+      "heart",
+      "/public/assets/HeartDiamond/Big Heart Idle (18x14).png",
+      {
+        frameWidth: 18,
+        frameHeight: 14,
+      }
+    );
   }
   create() {
     this.scene.start("MapScene");
