@@ -61,6 +61,22 @@ export default class BootScene extends Phaser.Scene {
       }
     );
     this.load.spritesheet(
+      "attack-right",
+      "/public/assets/SpritePlayer/Attack Right(78x58).png",
+      {
+        frameWidth: 78,
+        frameHeight: 58,
+      }
+    );
+    this.load.spritesheet(
+      "attack-left",
+      "/public/assets/SpritePlayer/Attack Left(78x58).png",
+      {
+        frameWidth: 78,
+        frameHeight: 58,
+      }
+    );
+    this.load.spritesheet(
       "diamond",
       "/public/assets/HeartDiamond/Big Diamond Idle (18x14).png",
       {
@@ -93,6 +109,8 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 14,
       }
     );
+    this.load.image("GuiSetting", "/public/assets/MenuGui/Icon_Settings.png");
+    this.load.image("GuiNextLevel", "/public/assets/HUD Text Box.png");
   }
   create() {
     this.scene.start("MapScene");

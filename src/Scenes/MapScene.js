@@ -61,6 +61,24 @@ export default class MapScene extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
+    this.anims.create({
+      key: "attack-Right",
+      frames: this.anims.generateFrameNumbers("attack-right", {
+        start: 0,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "attack-Left",
+      frames: this.anims.generateFrameNumbers("attack-left", {
+        start: 2,
+        end: 2,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
 
     //------------------ Diamond ----------------------
 
@@ -166,6 +184,8 @@ export default class MapScene extends Phaser.Scene {
     this.lastDecoration = "Right";
 
     this.scene.launch("UIScene");
+
+    console.log(this.cameras.main.width);
   }
 
   update() {
@@ -194,7 +214,13 @@ export default class MapScene extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.blocked.down) {
       this.player.setVelocityY(-200);
     }
+
+    if (this.cursors.space.isDown) {
+      this.player.anims.play(`attack-${this.lastDecoration}`, true);
+    }
   }
+
+  // CollectDimond
 
   collectDiamondFirst() {
     this.diamondFirst.disableBody(true, true);
@@ -215,6 +241,8 @@ export default class MapScene extends Phaser.Scene {
     this.diamondFour.disableBody(true, true);
     this.scene.get("UIScene").increaseGems();
   }
+
+  // CollectHeart
 
   collectHeartFirst() {
     this.heartFirst.disableBody(true, true);
