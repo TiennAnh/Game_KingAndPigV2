@@ -5,7 +5,10 @@ export default class BootScene extends Phaser.Scene {
     super("BootScene");
   }
   preload() {
+    // ---------------------- Map ------------------------ //
+
     this.load.tilemapTiledJSON("background", "/public/MapKingsAndPigsV2.json");
+    this.load.tilemapTiledJSON("map", "/public/Map/MapLevel2/MapLevel2.json");
     this.load.image("terrain", "/public/assets/Terrain/Terrain (32x32).png");
     this.load.image(
       "decorations",
@@ -20,6 +23,9 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 58,
       }
     );
+
+    //----------------------------------------------------- //
+
     this.load.spritesheet(
       "idle-left",
       "/public/assets/SpritePlayer/Idle Left(78x58).png",
@@ -111,6 +117,14 @@ export default class BootScene extends Phaser.Scene {
     );
     this.load.image("GuiSetting", "/public/assets/MenuGui/Icon_Settings.png");
     this.load.image("GuiNextLevel", "/public/assets/HUD Text Box.png");
+    this.load.spritesheet(
+      "checkPoint",
+      "/public/assets/CheckPoint/Checkpoint (Flag Idle)(64x64).png",
+      {
+        frameWidth: 64,
+        frameHeight: 64,
+      }
+    );
   }
   create() {
     this.scene.start("MapScene");

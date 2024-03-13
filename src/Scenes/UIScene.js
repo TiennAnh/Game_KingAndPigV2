@@ -19,8 +19,8 @@ export default class UIScene extends Phaser.Scene {
       .setInteractive();
 
     this.guiSetting.on("pointerdown", () => {
-      console.log("hello")
-    })
+      console.log("hello");
+    });
 
     this.textScoreGems = this.add
       .text(30, 51, "0", { fontSize: "15px", fontStyle: "bold" })
@@ -48,34 +48,37 @@ export default class UIScene extends Phaser.Scene {
       .setScale(1.2)
       .setAlpha(0.001);
   }
+
   update() {
     if (this.scoreGems === 4) {
-      this.add
-        .image(100, 100, "GuiNextLevel")
-        .setOrigin(0)
-        .setPosition(50, 100);
-      this.add.text(200, 200, "Next Level, please waittt...");
+      // this.add
+      //   .image(100, 100, "GuiNextLevel")
+      //   .setOrigin(0)
+      //   .setPosition(50, 100);
+      // this.add.text(200, 200, "Next Level, please waittt...");
+      this.scene.get("MapScene").visibleCheckPoint();
     }
   }
 
   increaseGems() {
     this.scoreGems += 1;
     this.textScoreGems.setText(`${this.scoreGems}`);
+    console.log("Gems: " + `${this.scoreGems}`, "UIS");
   }
 
   increaseHearts() {
     this.scoreHearts += 1;
     if (this.scoreHearts == 1) {
       this.heartBarFirst.setAlpha(2);
-      console.log("1");
+      console.log("Heart: 1");
     }
     if (this.scoreHearts == 2) {
       this.heartBarSecond.setAlpha(2);
-      console.log("2");
+      console.log("Heart: 2");
     }
     if (this.scoreHearts == 3) {
       this.heartBarThir.setAlpha(2);
-      console.log("3");
+      console.log("Heart: 3");
     }
   }
 }

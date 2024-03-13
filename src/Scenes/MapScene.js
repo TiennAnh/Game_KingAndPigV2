@@ -8,6 +8,8 @@ export default class MapScene extends Phaser.Scene {
     this.diamondSecond;
     this.diamondThir;
     this.diamondFour;
+    this.checkPoint;
+    this.scoreGems;
   }
   preload() {}
   create() {
@@ -27,6 +29,7 @@ export default class MapScene extends Phaser.Scene {
     this.physics.add.collider(this.player, colision);
     this.anims.create({
       key: "idle-Right",
+
       frames: this.anims.generateFrameNumbers("idle-right", {
         start: 0,
         end: 10,
@@ -176,6 +179,35 @@ export default class MapScene extends Phaser.Scene {
 
     // ------------------------------------------------- //
 
+    // ------------------- CheckPoint ------------------ //
+
+    this.checkPoint = this.physics.add
+      .sprite(300, 380, "checkPoint")
+      .setVisible(false);
+    this.anims.create({
+      key: "checkPoint",
+      frames: this.anims.generateFrameNumbers("checkPoint", {
+        start: 0,
+        end: 9,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+    this.physics.add.collider(this.checkPoint, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.checkPoint,
+      this.targetCheckPoint,
+      null,
+      this
+    );
+
+    // ------------------------------------------------ //
+
+    this.scoreGems = this.scene.get("UIScene").scoreGems;
+
+    console.log(this.scoreGems);
+
     this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
     this.cameras.main.setBounds(0, 0, 1250, 630);
 
@@ -197,6 +229,8 @@ export default class MapScene extends Phaser.Scene {
     this.heartFirst.anims.play("heart-idle", true);
     this.heartSecond.anims.play("heart-idle", true);
     this.heartThir.anims.play("heart-idle", true);
+
+    this.checkPoint.anims.play("checkPoint", true);
 
     if (this.cursors.right.isDown) {
       this.player.setVelocityX(150);
@@ -225,21 +259,29 @@ export default class MapScene extends Phaser.Scene {
   collectDiamondFirst() {
     this.diamondFirst.disableBody(true, true);
     this.scene.get("UIScene").increaseGems();
+    this.scoreGems += 1;
+    console.log("Gem: " + `${this.scoreGems}`, "MAP");
   }
 
   collectDiamondSecond() {
     this.diamondSecond.disableBody(true, true);
     this.scene.get("UIScene").increaseGems();
+    this.scoreGems += 1;
+    console.log("Gem: " + `${this.scoreGems}`, "MAP");
   }
 
   collectDiamondThir() {
     this.diamondThir.disableBody(true, true);
     this.scene.get("UIScene").increaseGems();
+    this.scoreGems += 1;
+    console.log("Gem: " + `${this.scoreGems}`, "MAP");
   }
 
   collectDiamondFour() {
     this.diamondFour.disableBody(true, true);
     this.scene.get("UIScene").increaseGems();
+    this.scoreGems += 1;
+    console.log("Gem: " + `${this.scoreGems}`, "MAP");
   }
 
   // CollectHeart
@@ -257,5 +299,15 @@ export default class MapScene extends Phaser.Scene {
   collectHeartThir() {
     this.heartThir.disableBody(true, true);
     this.scene.get("UIScene").increaseHearts();
+  }
+
+  visibleCheckPoint() {
+    this.checkPoint.setVisible(true);
+  }
+
+  targetCheckPoint() {
+    if (this.scoreGems === 4) {
+      this.scene.start("MapLevel2");
+    }
   }
 }
