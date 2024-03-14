@@ -206,8 +206,6 @@ export default class MapScene extends Phaser.Scene {
 
     this.scoreGems = this.scene.get("UIScene").scoreGems;
 
-    console.log(this.scoreGems);
-
     this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
     this.cameras.main.setBounds(0, 0, 1250, 630);
 

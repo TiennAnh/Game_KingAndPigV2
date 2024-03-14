@@ -15,6 +15,9 @@ export default class BootScene extends Phaser.Scene {
       "/public/assets/Decorations/Decorations (32x32).png"
     );
     this.load.image("colision", "/public/assets/Colision/beach_tiles.png");
+
+    // ------------------- PLAYER --------------- //
+
     this.load.spritesheet(
       "idle-right",
       "/public/assets/SpritePlayer/Idle Right(78x58).png",
@@ -23,8 +26,6 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 58,
       }
     );
-
-    //----------------------------------------------------- //
 
     this.load.spritesheet(
       "idle-left",
@@ -82,6 +83,9 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 58,
       }
     );
+
+    // ----------- DIAMOND * HEART * CHECKPOINT --------------- //
+
     this.load.spritesheet(
       "diamond",
       "/public/assets/HeartDiamond/Big Diamond Idle (18x14).png",
@@ -125,9 +129,30 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 64,
       }
     );
+
+    // --------------------- PIG ------------------------ //
+
+    this.load.spritesheet(
+      "idle-right-pig",
+      "/public/assets/SpritePig/Idle-Right (34x28).png",
+      {
+        frameWidth: 34,
+        frameHeight: 28,
+      }
+    );
+    this.load.spritesheet(
+      "idle-left-pig",
+      "/public/assets/SpritePig/Idle-Left (34x28).png",
+      {
+        frameWidth: 34,
+        frameHeight: 28,
+      }
+    );
+
+    this.load.image("canon", "/public/assets/Canon/Idle-Right.png");
   }
   create() {
-    this.scene.start("MapScene");
+    this.scene.start("MapLevel2");
   }
   update() {}
 }
