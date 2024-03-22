@@ -16,12 +16,16 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Decorations.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "E:/Work/FCS/Mit/kingsandpigv2_game/public/KingAndPigV2.tmx": {
             "scale": 0.700625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 572.3461195361284,
-                "y": 320.4281891168599
+                "x": 1066.1909009812666,
+                "y": 490.99018733273857
             }
         },
         "E:/Work/FCS/Mit/kingsandpigv2_game/public/KingAndPigV2.tmx#Colision": {
@@ -37,11 +41,14 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 479.33333333333326,
-                "y": 319.33333333333337
+                "x": 580,
+                "y": 258.66666666666663
             }
         },
         "MapLevel2.tmx#Colision": {
+            "scaleInDock": 1
+        },
+        "MapLevel2.tmx#Decorations": {
             "scaleInDock": 1
         },
         "MapLevel2.tmx#Terrain": {
@@ -60,11 +67,13 @@
         "MapLevel2.tmx",
         "Terrain.tsx",
         "Colision.tsx",
-        "E:/Work/FCS/Mit/kingsandpigv2_game/public/KingAndPigV2.tmx"
+        "E:/Work/FCS/Mit/kingsandpigv2_game/public/KingAndPigV2.tmx",
+        "Decorations.tsx"
     ],
     "project": "MapLevel2.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "Decorations.tsx",
         "E:/Work/FCS/Mit/kingsandpigv2_game/public/KingAndPigV2.tmx",
         "Colision.tsx",
         "Terrain.tsx",

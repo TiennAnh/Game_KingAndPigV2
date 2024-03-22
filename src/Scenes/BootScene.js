@@ -16,6 +16,14 @@ export default class BootScene extends Phaser.Scene {
     );
     this.load.image("colision", "/public/assets/Colision/beach_tiles.png");
 
+    // ------------------- DOOR ---------------- //
+
+    // this.load.spritesheet("door", "/public/assets/Door/Idle.png", {
+    //   frameWidth: 60,
+    //   frameHeight: 10,
+    // });
+    this.load.image("door", "/public/assets/Door/Idle.png");
+
     // ------------------- PLAYER --------------- //
 
     this.load.spritesheet(

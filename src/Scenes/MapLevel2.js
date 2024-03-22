@@ -17,9 +17,15 @@ export default class MapLevel2 extends Phaser.Scene {
     const decoration = map.createLayer("Decoration", [tileset3]);
     colision.setCollisionByProperty({ Colision: true });
 
+    // -------------------- DOOR ---------------------- //
+
+    this.doorStart = this.add.image(180, 540, "door");
+
+    this.doorNextLevel = this.add.image(850, 125, "door");
+
     // --------------------- PLAYER ------------------- //
 
-    this.player = this.physics.add.sprite(100, 500, "idle-right");
+    this.player = this.physics.add.sprite(180, 540, "idle-right");
     this.physics.add.collider(this.player, colision);
     this.anims.create({
       key: "idle-Right",
@@ -118,7 +124,7 @@ export default class MapLevel2 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1,
     });
-    this.diamondSecond = this.physics.add.sprite(600, 570, "diamond");
+    this.diamondSecond = this.physics.add.sprite(600, 600, "diamond");
     this.physics.add.collider(this.diamondSecond, colision);
     this.physics.add.overlap(
       this.player,
