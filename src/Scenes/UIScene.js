@@ -56,7 +56,7 @@ export default class UIScene extends Phaser.Scene {
       //   .setOrigin(0)
       //   .setPosition(50, 100);
       // this.add.text(200, 200, "Next Level, please waittt...");
-      this.scene.get("MapScene").visibleCheckPoint();
+      this.scene.get("MapScene").openDoor();
     }
   }
 
@@ -80,5 +80,9 @@ export default class UIScene extends Phaser.Scene {
       this.heartBarThir.setAlpha(2);
       console.log("Heart: 3");
     }
+  }
+
+  level2() {
+    this.scene.start("Maplevel2");
   }
 }

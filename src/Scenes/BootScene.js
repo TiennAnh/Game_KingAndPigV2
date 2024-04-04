@@ -24,6 +24,15 @@ export default class BootScene extends Phaser.Scene {
     // });
     this.load.image("door", "/public/assets/Door/Idle.png");
 
+    this.load.spritesheet(
+      "doorOpen",
+      "/public/assets/Door/Opening (46x56).png",
+      {
+        frameWidth: 46,
+        frameHeight: 56,
+      }
+    );
+
     // ------------------- PLAYER --------------- //
 
     this.load.spritesheet(
@@ -160,7 +169,7 @@ export default class BootScene extends Phaser.Scene {
     this.load.image("canon", "/public/assets/Canon/Idle-Right.png");
   }
   create() {
-    this.scene.start("MapLevel2");
+    this.scene.start("MapScene");
   }
   update() {}
 }

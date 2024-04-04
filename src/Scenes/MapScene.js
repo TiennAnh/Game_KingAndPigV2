@@ -8,8 +8,9 @@ export default class MapScene extends Phaser.Scene {
     this.diamondSecond;
     this.diamondThir;
     this.diamondFour;
-    this.checkPoint;
     this.scoreGems;
+    this.door;
+    this.doorOpen;
   }
   preload() {}
   create() {
@@ -25,11 +26,15 @@ export default class MapScene extends Phaser.Scene {
 
     colision.setCollisionByProperty({ Colision: true });
 
-    this.player = this.physics.add.sprite(100, 230, "idle-right");
+    this.door = this.add.image(155, 230, "door");
+
+    this.door = this.add.image(155, 550, "door");
+
+    this.player = this.physics.add.sprite(155, 230, "idle-right");
     this.physics.add.collider(this.player, colision);
+    this.player.setCircle(16, 16, 16);
     this.anims.create({
       key: "idle-Right",
-
       frames: this.anims.generateFrameNumbers("idle-right", {
         start: 0,
         end: 10,
@@ -83,6 +88,26 @@ export default class MapScene extends Phaser.Scene {
       repeat: -1,
     });
 
+    this.doorOpen = this.physics.add
+      .sprite(155, 500, "doorOpen")
+      .setVisible(false);
+    this.physics.add.collider(this.doorOpen, colision);
+    this.physics.add.overlap(
+      this.player,
+      this.doorOpen,
+      this.targetDoor,
+      null,
+      this
+    );
+    this.anims.create({
+      key: "keepOpen",
+      frames: this.anims.generateFrameNumbers("doorOpen", { start: 0, end: 4 }),
+      frameRate: 10,
+      repeat: 1,
+    });
+
+    this.doorOpen.anims.play("keepOpen", true);
+
     //------------------ Diamond ----------------------
 
     this.diamondFirst = this.physics.add.sprite(400, 250, "diamond");
@@ -134,8 +159,6 @@ export default class MapScene extends Phaser.Scene {
       this
     );
 
-    // ----------------------------------------------- //
-
     // ------------------- HEART -------------------- //
 
     this.heartFirst = this.physics.add.sprite(500, 250, "heart");
@@ -177,32 +200,7 @@ export default class MapScene extends Phaser.Scene {
       this
     );
 
-    // ------------------------------------------------- //
-
-    // ------------------- CheckPoint ------------------ //
-
-    this.checkPoint = this.physics.add
-      .sprite(300, 380, "checkPoint")
-      .setVisible(false);
-    this.anims.create({
-      key: "checkPoint",
-      frames: this.anims.generateFrameNumbers("checkPoint", {
-        start: 0,
-        end: 9,
-      }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    this.physics.add.collider(this.checkPoint, colision);
-    this.physics.add.overlap(
-      this.player,
-      this.checkPoint,
-      this.targetCheckPoint,
-      null,
-      this
-    );
-
-    // ------------------------------------------------ //
+    // ----------------------- CAMERA -------------------- //
 
     this.scoreGems = this.scene.get("UIScene").scoreGems;
 
@@ -228,16 +226,16 @@ export default class MapScene extends Phaser.Scene {
     this.heartSecond.anims.play("heart-idle", true);
     this.heartThir.anims.play("heart-idle", true);
 
-    this.checkPoint.anims.play("checkPoint", true);
-
     if (this.cursors.right.isDown) {
       this.player.setVelocityX(150);
       this.player.anims.play("turn-Right", true);
       this.lastDecoration = "Right";
+      this.player.setCircle(16, 16, 16);
     } else if (this.cursors.left.isDown) {
       this.player.setVelocityX(-150);
       this.player.anims.play("turn-Left", true);
       this.lastDecoration = "Left";
+      this.player.setCircle(16, 30, 16);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play(`idle-${this.lastDecoration}`, true);
@@ -299,13 +297,15 @@ export default class MapScene extends Phaser.Scene {
     this.scene.get("UIScene").increaseHearts();
   }
 
-  visibleCheckPoint() {
-    this.checkPoint.setVisible(true);
-  }
-
-  targetCheckPoint() {
+  targetDoor() {
     if (this.scoreGems === 4) {
       this.scene.start("MapLevel2");
     }
+  }
+
+  openDoor() {
+    setInterval(() => {
+      this.doorOpen.setVisible(true);
+    }, 500);
   }
 }
